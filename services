@@ -1,4 +1,5 @@
 docker service create \
+    --tty \
     --name gitlab-runner \
     --replicas 1 \
     --constraint node.hostname==TestNetDevPC01 \
@@ -8,9 +9,3 @@ docker service create \
     --env DOCKER_IMAGE=maze-runner \
     --env DOCKER_IMAGE_DESCRIPTION=maze-runner \
     gitlab-runner:custom
-
-
-docker run \
-    --name python-container
-    custom-python:latest \
-    sleep 3000
