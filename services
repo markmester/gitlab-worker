@@ -1,0 +1,16 @@
+docker service create \
+    --name gitlab-runner \
+    --replicas 1 \
+    --constraint node.hostname==TestNetDevPC01 \
+    --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
+    --env GITLAB_URL=http://192.168.1.250/ci \
+    --env GITLAB_REGISTRATION_TOKEN=22aAycsfMKMK-5MJd421 \
+    --env DOCKER_IMAGE=maze-runner \
+    --env DOCKER_IMAGE_DESCRIPTION=maze-runner \
+    gitlab-runner:custom
+
+
+docker run \
+    --name python-container
+    custom-python:latest \
+    sleep 3000
